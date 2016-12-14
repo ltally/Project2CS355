@@ -9,10 +9,11 @@
 <br />
 
 <table border="1">
-    <tr><th>Name</th><th>Action</th></tr>
+    <tr><th>Name</th><th>Order Number</th><th>Actions</th></tr>
     <% for(var i=0; result.length > i; i++ ) { %>
     <tr>
-        <td><a href="/customer/?customer_id=<%= result[i].customer_id %>"><%= result[i].fname%> <%= result[i].lname %></a></td>
+        <td><a href="/customer/?customer_id=<%= result[i].customer_id %>"><%= result[i].fname + " " + result[i].lname %></a></td>
+        <td><a href="/order_info/?order_num=<%= result[i].order_num %>"><%= result[i].order_num %></a></td>
         <td>
             <button onclick="event.preventDefault();window.location.href='/customer/edit2/?customer_id=<%= result[i].customer_id %>'">Edit</button>
             <form action="/customer/delete/" style="display: inline">

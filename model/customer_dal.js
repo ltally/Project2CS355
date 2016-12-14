@@ -5,7 +5,7 @@ var db  = require('./db_connection.js');
 var connection = mysql.createConnection(db.config);
 
 exports.getAll = function(callback) {
-    var query = 'SELECT * FROM customer;';
+    var query = 'SELECT * FROM customer_order_view;';
 
     connection.query(query, function(err, result) {
         callback(err, result);
@@ -13,14 +13,45 @@ exports.getAll = function(callback) {
 };
 
 exports.getById = function(customer_id, callback) {
-    var query = 'SELECT email, fname, lname, ifambassador FROM customer WHERE customer_id = ?';
+    var query = 'SELECT * FROM customer_order_view WHERE customer_id = ?';
     var queryData = [customer_id];
     console.log(query);
 
     connection.query(query, queryData, function(err, result) {
+        //customerOrderViewById (customer_id, function (err, order_info) {
+            //customerProductGetById (product_num, function (err, product) {
+                //customerQuantityGetById(order_num, function (err, order_product) {
+                    callback(err, result);
+                //});
+            //});
+        //});
+    });
+};
+
+/*var customerProductGetById = function(customer_id, callback) {
+    var query = 'SELECT * FROM customer_order_view WHERE customer_id = ?';
+    connection.query(query, customer_id, function (err, result) {
         callback(err, result);
     });
 };
+module.exports.customerOrderGetById = customerProductGetById;
+
+var customerQuantityGetById = function(customer_id, callback) {
+    var query = 'SELECT * FROM customer_order_view WHERE customer_id = ?';
+    connection.query(query, customer_id, function (err, result) {
+        callback(err, result);
+    });
+};
+module.exports.customerOrderGetById = customerQuantityGetById;
+
+var customerOrderViewById = function(customer_id, callback) {
+    var query = 'SELECT * FROM customer_order_view WHERE customer_id = ?';
+    connection.query(query, customer_id, function (err, result) {
+        callback(err, result);
+    });
+};
+module.exports.customerOrderViewById = customerOrderViewById;*/
+
 
 exports.insert = function(params, callback) {
     var query = 'INSERT INTO customer (customer_id, email, fname, lname, ifambassador) VALUES (?, ?, ?, ?, ?)';

@@ -1,0 +1,16 @@
+<%- include("../includes/header.ejs", {title:"Add New order"}); %>
+<h1>Update order <%= result[0].order_num %> order information </h1>
+<form action="/order_info/update" method="get">
+    <input type="hidden" id="order_num" name="order_num" value="<%= result[0].order_num %>">
+    Order Date:
+    <br />
+    <input id="order_date" name="order_date" type="date" value="<%= result[0].order_date%>"/>
+    <br />
+    <br />
+    Coupon Code:
+    <br />
+    <input id="coupon_code" name="coupon_code" type="text" value="<%= result[0].coupon_code%>"/>
+    <br />
+    <input type="submit" />
+</form>
+<%- include("../includes/footer.ejs"); %>

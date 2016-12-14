@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var customer_dal = require('../model/customer_dal');
+//var orderinfo_dal = require('../model/orderinfo_dal');
 
 
 // View All customers
@@ -22,7 +23,7 @@ router.get('/', function(req, res){
         res.send('customer_id is null');
     }
     else {
-        customer_dal.getById(req.query.customer_id, function(err,result) {
+        customer_dal.getById(req.query.customer_id, function(err, result) {
             if (err) {
                 res.send(err);
             }

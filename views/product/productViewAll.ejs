@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Product</title>
+</head>
+<body>
+<h1>Product</h1>
+<a href="/product/add">Add New Product</a> <br />
+
+<br />
+
+<table border="1">
+    <tr><th>Product Name</th><th>Order Number</th><th>Actions</th></tr>
+    <% for(var i=0; result.length > i; i++ ) { %>
+    <tr>
+        <td><a href="/product/?product_num=<%= result[i].product_num %>"><%= result[i].product_name %></a></td>
+        <td><a href="/order_info/?order_num=<%= result[i].order_num %>"><%= result[i].order_num %></a></td>
+
+        <td>
+            <button onclick="event.preventDefault();window.location.href='/product/edit2/?product_num=<%= result[i].product_num %>'">Edit</button>
+            <form action="/product/delete/" style="display: inline">
+                <input type="hidden" name="product_num" id="product_num" value="<%= result[i].product_num %>" />
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    <% } %>
+</table>
+</body>
+
+</html>

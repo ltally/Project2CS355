@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Order</title>
+</head>
+<body>
+<h1>Order</h1>
+<a href="/order_info/add">Add New Order</a> <br />
+
+<br />
+
+<table border="1">
+    <tr><th>Order Number</th><th>Customer Name</th><th>Tracking Number</th><th>Credit Card Number</th><th>Product Name</th><th>Quantity</th><th>Actions</th></tr>
+    <% for(var i=0; result.length > i; i++ ) { %>
+    <tr>
+        <td><a href="/order_info/?order_num=<%= result[i].order_num %>"><%= result[i].order_num %></a></td>
+        <td><a href="/customer/?customer_id=<%= result[i].customer_id %>"><%= result[i].fname + " " + result[i].lname %></a></td>
+        <td><a href="/shipping/?tracking_num=<%= result[i].tracking_num %>"><%= result[i].tracking_num %></a></td>
+        //<td><a href="/credit_card/?card_number=<%= result[i].card_number %>"><%= result[i].card_number %></a></td>
+        //<td><a href="/product/?product_name=<%= result[i].product_name %>"><%= result[i].product_name %></a></td>
+        //<td><a href="/order_product/?quantity=<%= result[i].quantity %>"><%= result[i].quantity %></a></td>
+        <td>
+            <button onclick="event.preventDefault();window.location.href='/order_info/edit2/?order_num=<%= result[i].order_num %>'">Edit</button>
+            <form action="/order_info/delete/" style="display: inline">
+                <input type="hidden" name="order_num" id="order_num" value="<%= result[i].order_num %>" />
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    <% } %>
+</table>
+</body>
+
+</html>
