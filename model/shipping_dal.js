@@ -13,7 +13,7 @@ exports.getAll = function(callback) {
 };
 
 exports.getById = function(order_num, callback) {
-    var query = 'SELECT * FROM shipping_view WHERE tracking_num = ?';
+    var query = 'SELECT * FROM shipping_view WHERE order_num = ?';
     var queryData = [order_num];
     console.log(query);
 

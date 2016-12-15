@@ -37,6 +37,7 @@ app.use('/customer', customer);
 app.use('/order_info', order_info);
 app.use('/product', product);
 app.use('/shipping', shipping);
+app.use(express.static('public/images'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -18,16 +18,16 @@ router.get('/all', function(req, res) {
 
 // View the order_info for the given id
 router.get('/', function(req, res){
-    if(req.query.order_num == null) {
-        res.send('order_num is null');
+    if(req.query.tracking_num == null) {
+        res.send('tracking_num is null');
     }
     else {
-        shipping_dal.getById(req.query.order_num, function(err, shipping, billing_address, shipping_address) {
+        shipping_dal.getById(req.query.tracking_num, function(err, shipping, billing_address, shipping_address) {
             if (err) {
                 res.send(err);
             }
             else {
-                res.render('shipping/shippingViewById', {'shipping': shipping, 'billing_address': billing_address, 'shiping_address': shipping_address});
+                res.render('shipping/shippingViewById', {shipping: shipping, billing_address: billing_address, shipping_address: shipping_address});
             }
         });
     }

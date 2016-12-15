@@ -15,9 +15,9 @@
         <td><a href="/shipping/?tracking_num=<%= result[i].tracking_num %>"><%= result[i].tracking_num%></a></td>
         <td><a href="/order_info/?order_num=<%= result[i].order_num %>"><%= result[i].order_num %></a></td>
         <td>
-            <button onclick="event.preventDefault();window.location.href='/shipping/edit2/?order_num=<%= result[i].order_num %>'">Edit</button>
+            <button onclick="event.preventDefault();window.location.href='/shipping/edit2/?tracking_num=<%= result[i].tracking_num %>'">Edit</button>
             <form action="/customer/delete/" style="display: inline">
-                <input type="hidden" name="order_num" id="order_num" value="<%= result[i].order_num %>" />
+                <input type="hidden" name="tracking_num" id="tracking_num" value="<%= result[i].tracking_num %>" />
                 <input type="submit" value="Delete"/>
             </form>
         </td>
