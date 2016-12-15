@@ -12,7 +12,7 @@ exports.getAll = function(callback) {
     });
 };
 
-exports.getById = function(order_num, product_num, callback) {
+exports.getById = function(order_num, callback) {
     var query = 'SELECT * FROM order_view WHERE order_num = ?';
     var queryData = [order_num];
     console.log(query);
@@ -20,13 +20,13 @@ exports.getById = function(order_num, product_num, callback) {
     connection.query(query, queryData, function(err, order_info) {
         //orderCustomerViewById (order_num, function (err, customer) {
             //orderShippingViewById (tracking_num, function (err, shipping) {
-                orderProductQuanViewById (product_num, function (err, order_product) {
-                    orderProductViewById(product_num, function (err, product) {
+                //orderProductQuanViewById (order_num, function (err, order_product) {
+                    orderProductViewById(order_num, function (err, order_product) {
                         //callback(err, order_info, customer, shipping, credit_card, product);
-        callback(err, order_info, product, order_product);
+                        callback(err, order_info, order_product);
                     //});
                 //});
-            });
+            //});
         });
     });
 };
@@ -61,19 +61,19 @@ var orderShippingViewById = function(tracking_num, callback) {
         callback(err, result);
     });
 };
-module.exports.orderShippingViewById = orderShippingViewById;*/
+module.exports.orderShippingViewById = orderShippingViewById;
 
 var orderProductQuanViewById = function(product_num, callback) {
-    var query = 'SELECT * FROM order_view WHERE product_num = ?';
-    connection.query(query, product_num, function (err, result) {
+    var query = 'SELECT * FROM order_view WHERE order_num = ?';
+    connection.query(query, order_num, function (err, result) {
         callback(err, result);
     });
 };
-module.exports.orderProductQuanViewById = orderProductQuanViewById;
+module.exports.orderProductQuanViewById = orderProductQuanViewById;*/
 
-var orderProductViewById = function(product_num, callback) {
-    var query = 'SELECT * FROM order_view WHERE product_num = ?';
-    connection.query(query, product_num, function (err, result) {
+var orderProductViewById = function(order_num, callback) {
+    var query = 'SELECT * FROM order_view WHERE order_num = ?';
+    connection.query(query, order_num, function (err, result) {
         callback(err, result);
     });
 };

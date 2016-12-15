@@ -1,0 +1,25 @@
+<%- include("../includes/header.ejs", {title:"Shipment - " + shipping[0].tracking_num}); %>
+<h1>Shipment - <%= customer[0].fname + ' ' + customer[0].lname %></h1>
+<ul>
+    <li>Tracking Number: <%= shipping[0].tracking_num %></li>
+    <li>Shipment Date: <%= shipping[0].ship_date %></li>
+    <li>Billing Address:
+        <ul>
+            <% for (var i = 0, billing_address.length >i; i++ ) { %>
+                <li><%= billing_address[i].ba_street_num + billing_address[i].ba_street_name%> </li>
+                <li><%= billing_address[i].ba_city + ', ' + billing_address[i].ba_state + billing_address[i].ba_zip%></li>
+                <% } %>
+        </ul>
+    </li>Shipping Address:
+        <ul>
+            <% for (var i = 0, result.length >i; i++ ) { %>
+                <li><%= shipping_address[i].sa_street_num + shipping_address[i].sa_street_name%> </li>
+                <li><%= shipping_address[i].sa_city + ', ' + shipping_address[i].sa_state + shipping_address[i].sa_zip%></li>
+            <% } %>
+        </ul>
+    </li>
+   </ul>
+
+<a href="/shipping/all"><< back</a>
+
+<%- include("../includes/footer.ejs"); %>

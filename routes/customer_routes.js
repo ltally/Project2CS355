@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var customer_dal = require('../model/customer_dal');
-//var orderinfo_dal = require('../model/orderinfo_dal');
+var orderinfo_dal = require('../model/orderinfo_dal');
 
 
 // View All customers
@@ -23,12 +23,12 @@ router.get('/', function(req, res){
         res.send('customer_id is null');
     }
     else {
-        customer_dal.getById(req.query.customer_id, function(err, result) {
+        customer_dal.getById(req.query.customer_id, function(err, customer, order_info, credit_card) {
             if (err) {
                 res.send(err);
             }
             else {
-                res.render('customer/customerViewById', {'result': result});
+                res.render('customer/customerViewById', {'customer': customer, 'order_info': order_info, 'credit_card': credit_card});
             }
         });
     }

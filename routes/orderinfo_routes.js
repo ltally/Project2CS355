@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var orderinfo_dal = require('../model/orderinfo_dal');
+var product_dal = require('../model/product_dal');
 
 
 // View All orders
@@ -22,12 +23,12 @@ router.get('/', function(req, res){
         res.send('order_num is null');
     }
     else {
-        orderinfo_dal.getById(req.query.order_num, function(err, order_info, product, order_product) {
+        orderinfo_dal.getById(req.query.order_num, function(err, order_info, order_product) {
             if (err) {
                 res.send(err);
             }
             else {
-                res.render('order_info/orderinfoViewById', {'order_info': order_info, 'product': product, 'order_product': order_product});
+                res.render('order_info/orderinfoViewById', {'order_info': order_info, 'order_product': order_product});
             }
         });
     }

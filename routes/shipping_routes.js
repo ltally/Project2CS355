@@ -1,16 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var product_dal = require('../model/product_dal');
+var shipping_dal = require('../model/shipping_dal');
 
 
 // View All orders
 router.get('/all', function(req, res) {
-    product_dal.getAll(function(err, result){
+    shipping_dal.getAll(function(err, result){
         if(err) {
             res.send(err);
         }
         else {
-            res.render('product/productViewAll', { 'result':result });
+            res.render('shipping/shippingViewAll', { 'result':result });
         }
     });
 
@@ -18,16 +18,16 @@ router.get('/all', function(req, res) {
 
 // View the order_info for the given id
 router.get('/', function(req, res){
-    if(req.query.product_num == null) {
-        res.send('product_num is null');
+    if(req.query.order_num == null) {
+        res.send('order_num is null');
     }
     else {
-        product_dal.getById(req.query.product_num, function(err, result) {
+        shipping_dal.getById(req.query.order_num, function(err, shipping, billing_address, shipping_address) {
             if (err) {
                 res.send(err);
             }
             else {
-                res.render('product/productViewById', {'result': result});
+                res.render('shipping/shippingViewById', {'shipping': shipping, 'billing_address': billing_address, 'shiping_address': shipping_address});
             }
         });
     }

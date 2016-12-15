@@ -17,14 +17,14 @@ exports.getById = function(customer_id, callback) {
     var queryData = [customer_id];
     console.log(query);
 
-    connection.query(query, queryData, function(err, result) {
-        //customerOrderViewById (customer_id, function (err, order_info) {
-            //customerProductGetById (product_num, function (err, product) {
+    connection.query(query, queryData, function(err, customer) {
+        customerOrderViewById (customer_id, function (err, order_info) {
+            customerCreditViewById (customer_id, function (err, credit_card) {
                 //customerQuantityGetById(order_num, function (err, order_product) {
-                    callback(err, result);
+                    callback(err, customer, order_info, credit_card);
                 //});
-            //});
-        //});
+            });
+        });
     });
 };
 
@@ -34,15 +34,15 @@ exports.getById = function(customer_id, callback) {
         callback(err, result);
     });
 };
-module.exports.customerOrderGetById = customerProductGetById;
+module.exports.customerOrderGetById = customerProductGetById; */
 
-var customerQuantityGetById = function(customer_id, callback) {
+var customerCreditViewById = function(customer_id, callback) {
     var query = 'SELECT * FROM customer_order_view WHERE customer_id = ?';
     connection.query(query, customer_id, function (err, result) {
         callback(err, result);
     });
 };
-module.exports.customerOrderGetById = customerQuantityGetById;
+module.exports.customerCreditViewById = customerCreditViewById;
 
 var customerOrderViewById = function(customer_id, callback) {
     var query = 'SELECT * FROM customer_order_view WHERE customer_id = ?';
@@ -50,7 +50,7 @@ var customerOrderViewById = function(customer_id, callback) {
         callback(err, result);
     });
 };
-module.exports.customerOrderViewById = customerOrderViewById;*/
+module.exports.customerOrderViewById = customerOrderViewById;
 
 
 exports.insert = function(params, callback) {
