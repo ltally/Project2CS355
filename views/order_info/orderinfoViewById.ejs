@@ -2,11 +2,17 @@
 <h1>Order Number - <%= order_info[0].order_num %></h1>
 <ul>
     <li>Order Date: <%= order_info[0].order_date %></li>
-    <li>Product Name: <%= order_product[0].product_name%></li>
-    <li>Quantity Ordered: <%= order_product[0].quantity%></li>
+    <li>Product Name(s):
+        <ul>
+            <% for(var i=0; order_product.length > i; i++ ) { %>
+            <li><%= order_product[i].product_name + ' ' + '|' + ' '
+                + 'Quantity Ordered: ' + order_product[i].quantity%></li>
+            <% } %>
+        </ul>
+    </li>
     <li>Coupon Code: <%= order_info[0].coupon_code%></li>
 
 </ul>
-</body>
+<a href="/order_info/all"><< back</a>
 
-</html>
+<%- include("../includes/footer.ejs"); %>

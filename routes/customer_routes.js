@@ -37,12 +37,13 @@ router.get('/', function(req, res){
 // Return the add a new customer form
 router.get('/add', function(req, res){
     // passing all the query parameters (req.query) to the insert function instead of each individually
-    customer_dal.getAll(function(err,result) {
+    //customer_dal.getAll(function(err,customer) {
+    orderinfo_dal.getAll (function(err,order_info) {
         if (err) {
             res.send(err);
         }
         else {
-            res.render('customer/customerAdd', {'customer': result});
+            res.render('customer/customerAdd', {order_info: order_info});
         }
     });
 });
@@ -62,10 +63,14 @@ router.get('/insert', function(req, res){
     else if(req.query.ifambassador == null){
         res.send('You must select whether or not this customer is an ambassador');
     }
+    //else if(req.query.order_num == null) {
+        //res.send('At least one order number must be selected');
+    //}
     else {
         // passing all the query parameters (req.query) to the insert function instead of each individually
         customer_dal.insert(req.query, function(err,result) {
             if (err) {
+                console.log(err)
                 res.send(err);
             }
             else {

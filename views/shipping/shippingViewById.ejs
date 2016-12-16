@@ -2,14 +2,19 @@
 <h1>Shipment - <%= shipping[0].ship_date%></h1>
 <ul>
     <li>Shipment Date: <%= shipping[0].ship_date %></li>
-    <li>Billing Address: <%= billing_address[0].ba_street_num + billing_address[0].ba_street_name +
-                    billing_address[0].ba_city + ', ' + billing_address[0].ba_state + billing_address[0].ba_zip %></li>
-
+    <li>Billing Address:
+        <ul>
+            <% for(var i = 0; billing_address.length >i; i++ ) { %>
+                <li><%= billing_address[i].ba_street_num + ' ' + billing_address[i].ba_street_name%> </li>
+                <%= billing_address[i].ba_city + ', ' + billing_address[i].ba_state + ' ' + billing_address[i].ba_zip%>
+            <% } %>
+        </ul>
+    </li>
     </li>Shipping Address:
         <ul>
             <% for(var i = 0; shipping_address.length >i; i++ ) { %>
-                <li><%= shipping_address[i].sa_street_num + shipping_address[i].sa_street_name%> </li>
-                <li><%= shipping_address[i].sa_city + ', ' + shipping_address[i].sa_state + shipping_address[i].sa_zip%></li>
+                <li><%= shipping_address[i].sa_street_num + ' ' + shipping_address[i].sa_street_name%> </li>
+                <%= shipping_address[i].sa_city + ', ' + shipping_address[i].sa_state + ' ' + shipping_address[i].sa_zip%>
             <% } %>
         </ul>
     </li>

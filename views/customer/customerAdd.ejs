@@ -16,6 +16,22 @@
     <br />
     Ambassador?: <input id ="ifambassador" name="ifambassador" type="number" />
     <br />
+    <br />
+    Order Number:
+    <br />
+    <select id="order_num" name="order_num" multiple="multiple">
+        <% for(var i=0; order_info.length > i; i++ ) { %>
+            <option value="<%= order_info[i].order_num%>"><%= order_info[i].order_num%></option>
+        <% } %>
+    </select>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#order_num').multiselect();
+        });
+    </script>
+
+    <br />
     <input type="submit" />
 
 </form>

@@ -5,8 +5,14 @@
     <li>Customer Name: <%= customer[0].fname %> <%= customer[0].lname %></li>
     <li>Ambassador?: <%= customer[0].ifambassador %> </li>
     <li>Credit Card Number: <%= credit_card[0].card_number %> </li>
-    <li>Order Number: <%= order_info[0].order_num %> </li>
+    <li>Order Number(s):
+        <ul>
+            <% for(var i=0; order_info.length > i; i++ ) { %>
+            <li><%= order_info[i].order_num %></li>
+            <% } %>
+        </ul>
+    </li>
 </ul>
-</body>
+<a href="/customer/all"><< back</a>
 
-</html>
+<%- include("../includes/footer.ejs"); %>

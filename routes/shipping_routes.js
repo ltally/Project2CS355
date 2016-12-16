@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var shipping_dal = require('../model/shipping_dal');
+var orderinfo_dal = require('../model/orderinfo_dal');
 
 
 // View All orders
@@ -75,13 +76,13 @@ router.get('/insert', function(req, res){
     }
 });
 
-// Delete an order_info for the given order_num
+// Delete an order_info for the given tracking_num
 router.get ('/delete', function(req, res){
-    if(req.query.order_num == null) {
-        res.send('order_num is null');
+    if(req.query.tracking_num == null) {
+        res.send('tracking_num is null');
     }
     else {
-        orderinfo_dal.delete(req.query.order_num, function(err,result){
+        orderinfo_dal.delete(req.query.tracking_num, function(err,result){
             if(err) {
                 res.send(err);
             }
@@ -102,11 +103,11 @@ router.get('/update', function(req, res){
 module.exports = router;
 
 router.get('/edit2', function(req, res){
-    if(req.query.order_num == null) {
+    if(req.query.tracking_num == null) {
         res.send('A coupon code is required');
     }
     else {
-        orderinfo_dal.getById(req.query.order_num, function(err, result){
+        orderinfo_dal.getById(req.query.tracking_num, function(err, result){
             res.render('order_info/orderinfoUpdate', {'result': result});
         });
     }
