@@ -85,17 +85,35 @@ exports.insert = function(params, callback) {
 
     // the question marks in the sql query above will be replaced by the values of the
     // the data in queryData
-    var queryData = [params.order_num, params.email, params.fname, params.lname, params.ifambassador];
+    var orderData = [params.order_num, params.email, params.fname, params.lname, params.ifambassador];
 
-    connection.query(query, queryData, function(err, result) {
+    connection.query(query, orderData, function(err, result) {
+        var order_num = result.insertId;
+        orderProductInsert(order_num, params.product_num, function (err, result) {
+        });
         callback(err, result);
     });
+};
+var orderProductInsert = function(order_num, productIdArray, callback){
+    // NOTE THAT THERE IS ONLY ONE QUESTION MARK IN VALUES ?
+    var query = 'INSERT INTO order_product (order_num, product_num) VALUES ?';
 
-}
+    // TO BULK INSERT RECORDS WE CREATE A MULTIDIMENSIONAL ARRAY OF THE VALUES
+    var orderProductData = [];
+    for(var i=0; i < productIdArray.length; i++) {
+        orderProductData.push([order_num, productIdArray[i]]);
+    }
+    connection.query(query, [orderProductData], function(err, result){
+        console.log("INSERTING PRODUCTS");
+        callback(err, result);
+    });
+};
+//export the same function so it can be used by external callers
+module.exports.orderProductInsert = orderProductInsert;
 
 exports.update = function(params, callback) {
-    var query = 'UPDATE order_info SET email = ?, fname = ?, lname = ?, ifambassador = ? WHERE order_num = ?';
-    var queryData = [params.email, params.fname, params.lname, params.ifambassador, params.order_num];
+    var query = 'UPDATE order_info SET order_date = ? coupon_code = ? WHERE order_num = ?';
+    var queryData = [params.order_date, params.coupon_code, params.order_num];
 
     connection.query(query, queryData, function(err, result) {
         callback(err, result);

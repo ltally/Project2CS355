@@ -81,30 +81,30 @@ exports.getById = function(product_num, callback) {
 
 
 exports.insert = function(params, callback) {
-    var query = 'INSERT INTO order_info (order_num, email, fname, lname, ifambassador) VALUES (?, ?, ?, ?, ?)';
+    var query = 'INSERT INTO product (product_num, product_name, price) VALUES (?, ?, ?)';
 
     // the question marks in the sql query above will be replaced by the values of the
     // the data in queryData
-    var queryData = [params.order_num, params.email, params.fname, params.lname, params.ifambassador];
+    var queryData = [params.product_num, params.product_name, params.price];
 
     connection.query(query, queryData, function(err, result) {
         callback(err, result);
     });
 
-}
+};
 
 exports.update = function(params, callback) {
-    var query = 'UPDATE order_info SET email = ?, fname = ?, lname = ?, ifambassador = ? WHERE order_num = ?';
-    var queryData = [params.email, params.fname, params.lname, params.ifambassador, params.order_num];
+    var query = 'UPDATE product SET product_name = ?, price = ? WHERE product_num = ?';
+    var queryData = [params.product_name, params.price, params.product_num];
 
     connection.query(query, queryData, function(err, result) {
         callback(err, result);
     });
 };
 
-exports.delete = function(order_num, callback) {
-    var query = 'DELETE FROM order_info WHERE order_num = ?';
-    var queryData = [order_num];
+exports.delete = function(product_num, callback) {
+    var query = 'DELETE FROM product WHERE product_num = ?';
+    var queryData = [product_num];
 
     connection.query(query, queryData, function (err, result) {
         callback(err, result);

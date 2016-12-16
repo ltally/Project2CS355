@@ -1,0 +1,11 @@
+<%- include("../includes/header.ejs", {title:"Add New Shipment"}); %>
+<h1>Update Shipment <%= result[0].tracking_num%>'s information </h1>
+<form action="/shipping/update" method="get">
+    <input type="hidden" id="tracking_num" name="tracking_num" value="<%= result[0].tracking_num %>">
+    Ship Date:
+    <br />
+    <input id="ship_date" name="ship_date" type="date" value="<%= result[0].ship_date%>"/>
+
+    <input type="submit" />
+</form>
+<%- include("../includes/footer.ejs"); %>

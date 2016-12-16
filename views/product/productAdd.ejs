@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>Add New Product</title>
+</head>
+<body>
+<h1>Add New Product</h1>
+<form action="/product/insert" method="get">
+    Product Name: <input id="product_name" name="product_name" type="text" />
+    <br />
+    <br />
+    Price: <input id ="price" name="price" type="number" />
+    <br />
+    <br />
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#product_num').multiselect();
+        });
+    </script>
+    <br />
+    <br />
+
+    <input type="submit" />
+
+</form>
+</body>

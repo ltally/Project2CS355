@@ -43,21 +43,21 @@ var shippingSAViewById = function(tracking_num, callback) {
 module.exports.shippingSAViewById = shippingSAViewById;
 
 exports.insert = function(params, callback) {
-    var query = 'INSERT INTO order_info (tracking_num, email, fname, lname, ifambassador) VALUES (?, ?, ?, ?, ?)';
+    var query = 'INSERT INTO shipping (tracking_num, ship_date, shipping_address, billing_address) VALUES (?, ?, ?, ?)';
 
     // the question marks in the sql query above will be replaced by the values of the
     // the data in queryData
-    var queryData = [params.tracking_num, params.email, params.fname, params.lname, params.ifambassador];
+    var queryData = [params.tracking_num, params.ship_date, params.shipping_address, params.billing_address];
 
     connection.query(query, queryData, function(err, result) {
         callback(err, result);
     });
 
-}
+};
 
 exports.update = function(params, callback) {
-    var query = 'UPDATE order_info SET email = ?, fname = ?, lname = ?, ifambassador = ? WHERE tracking_num = ?';
-    var queryData = [params.email, params.fname, params.lname, params.ifambassador, params.tracking_num];
+    var query = 'UPDATE shipping SET ship_date = ? WHERE tracking_num = ?';
+    var queryData = [params.ship_date, params.tracking_num];
 
     connection.query(query, queryData, function(err, result) {
         callback(err, result);
@@ -65,7 +65,7 @@ exports.update = function(params, callback) {
 };
 
 exports.delete = function(tracking_num, callback) {
-    var query = 'DELETE FROM order_info WHERE tracking_num = ?';
+    var query = 'DELETE FROM shipping WHERE tracking_num = ?';
     var queryData = [tracking_num];
 
     connection.query(query, queryData, function (err, result) {

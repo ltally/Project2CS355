@@ -4,12 +4,29 @@
 </head>
 <body>
 <h1>Add New Order</h1>
-<form action="/customer/insert" method="get">
+<form action="/order/insert" method="get">
     Order Date: <input id="order_date" name="order_date" type="date" />
     <br />
     <br />
     Coupon Code: <input id ="coupon_code" name="coupon_code" type="text" />
     <br />
+    <br />
+    Products:
+    <br />
+    <select id="product_num" name="product_num" multiple="multiple">
+        <% for(var i=0; product.length > i; i++ ) { %>
+        <option value="<%= product[i].product_num %>"><%= product[i].product_name %></option>
+        <% } %>
+    </select>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#product_num').multiselect();
+        });
+    </script>
+    <br />
+    <br />
+
     <input type="submit" />
 
 </form>

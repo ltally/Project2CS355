@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>Add New Shipment</title>
+</head>
+<body>
+<h1>Add New Shipment</h1>
+<form action="/shipping/insert" method="get">
+    Tracking Number: <input id="tracking_num" name="tracking_num" type="text" />
+    <br />
+    <br />
+    Shipment Date: <input id="ship_date" name="ship_date" type="date" />
+    <br />
+    <br />
+    Shipping Address:
+    <br />
+    <select id="tracking_num" name="tracking_num">
+        <% for(var i=0; shipping.length > i; i++ ) { %>
+        <option value="<%= shipping[i].tracking_num %>"><%= shipping[i].sa_street_num + ' ' + shipping[i].sa_street_name%> <br />
+            <%= shipping[i].sa_city + ', ' + shipping[i].sa_state + ' ' + shipping[i].sa_zip%></option>
+        <% } %>
+    </select>
+    <br />
+    <br />
+    Billing Address:
+    <br />
+    <select id="tracking_num" name="tracking_num">
+        <% for(var i=0; shipping.length > i; i++ ) { %>
+        <option value="<%= shipping[i].tracking_num %>"><%= shipping[i].ba_street_num + ' ' + shipping[i].ba_street_name%> <br />
+            <%= shipping[i].ba_city + ', ' + shipping[i].ba_state + ' ' + shipping[i].ba_zip%></option>
+        <% } %>
+    </select>
+
+    <input type="submit" />
+
+</form>
+</body>
+
+</html>

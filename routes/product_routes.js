@@ -36,12 +36,12 @@ router.get('/', function(req, res){
 // Return the add a new order_info form
 router.get('/add', function(req, res){
     // passing all the query parameters (req.query) to the insert function instead of each individually
-    orderinfo_dal.getAll(function(err,result) {
+    product_dal.getAll(function(err,result) {
         if (err) {
             res.send(err);
         }
         else {
-            res.render('order_info/orderinfoAdd', {'order_info': result});
+            res.render('product/productAdd', {'product': result});
         }
     });
 });
@@ -49,27 +49,21 @@ router.get('/add', function(req, res){
 // insert an order_info record
 router.get('/insert', function(req, res){
     //simple validation
-    if(req.query.email == null) {
-        res.send('Email must be provided.');
+    if(req.query.price == null) {
+        res.send('Pride must be provided.');
     }
-    else if(req.query.fname == null){
-        res.send('A first name must be selected');
-    }
-    else if(req.query.lname == null){
-        res.send('A last name must be selected');
-    }
-    else if(req.query.ifambassador == null){
-        res.send('You must select whether or not this order_info is an ambassador');
+    else if(req.query.product_name == null){
+        res.send('A product name must be selected');
     }
     else {
         // passing all the query parameters (req.query) to the insert function instead of each individually
-        orderinfo_dal.insert(req.query, function(err,result) {
+        product_dal.insert(req.query, function(err,result) {
             if (err) {
                 res.send(err);
             }
             else {
                 //poor practice, but we will handle it differently once we start using Ajax
-                res.redirect(302, '/order_info/all');
+                res.redirect(302, '/product/all');
             }
         });
     }
@@ -77,37 +71,37 @@ router.get('/insert', function(req, res){
 
 // Delete an order_info for the given order_num
 router.get ('/delete', function(req, res){
-    if(req.query.order_num == null) {
-        res.send('order_num is null');
+    if(req.query.product_num == null) {
+        res.send('product_num is null');
     }
     else {
-        orderinfo_dal.delete(req.query.order_num, function(err,result){
+        product_dal.delete(req.query.product_num, function(err,result){
             if(err) {
                 res.send(err);
             }
             else {
                 //poor practice, but we will handle it differently once we start using Ajax
-                res.redirect(302, '/order_info/all');
+                res.redirect(302, '/product/all');
             }
         });
     }
 });
 
 router.get('/update', function(req, res){
-    orderinfo_dal.update(req.query, function (err, result) {
-        res.redirect(302, '/order_info/all');
+    product_dal.update(req.query, function (err, result) {
+        res.redirect(302, '/product/all');
     });
 });
 
 module.exports = router;
 
 router.get('/edit2', function(req, res){
-    if(req.query.order_num == null) {
-        res.send('A coupon code is required');
+    if(req.query.product_num == null) {
+        res.send('A product number is required');
     }
     else {
-        orderinfo_dal.getById(req.query.order_num, function(err, result){
-            res.render('order_info/orderinfoUpdate', {'result': result});
+        product_dal.getById(req.query.product_num, function(err, result){
+            res.render('product/productUpdate', {'result': result});
         });
     }
 });

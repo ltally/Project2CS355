@@ -1,0 +1,15 @@
+<%- include("../includes/header.ejs", {title:"Add New ambassador"}); %>
+<h1>Update Product <%= result[0].product_name%>'s information </h1>
+<form action="/product/update" method="get">
+    <input type="hidden" id="product_num" name="product_num" value="<%= result[0].product_num %>">
+    Product Name:
+    <br />
+    <input id="product_name" name="product_name" type="text" value="<%= result[0].product_name%>"/>
+    <br />
+    <br />
+    Price:
+    <br />
+    <input id="price" name="price" type="number" value="<%= result[0].price%>"/>
+    <input type="submit" />
+</form>
+<%- include("../includes/footer.ejs"); %>

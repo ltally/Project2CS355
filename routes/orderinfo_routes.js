@@ -37,23 +37,27 @@ router.get('/', function(req, res){
 // Return the add a new order_info form
 router.get('/add', function(req, res){
     // passing all the query parameters (req.query) to the insert function instead of each individually
-    orderinfo_dal.getAll(function(err,result) {
-        if (err) {
-            res.send(err);
-        }
-        else {
-            res.render('order_info/orderinfoAdd', {'order_info': result});
-        }
-    });
+   // orderinfo_dal.getAll(function(err,result) {
+        product_dal.getAll(function(err,product) {
+            if (err) {
+                res.send(err);
+            }
+            else {
+                res.render('order_info/orderinfoAdd', {
+                    //order_info: order_info,
+                    product: product});
+            }
+        });
+    //});
 });
 
 // insert an order_info record
 router.get('/insert', function(req, res){
     //simple validation
-    if(req.query.email == null) {
-        res.send('Email must be provided.');
+    if(req.query.order_date == null) {
+        res.send('Date must be provided.');
     }
-    else if(req.query.fname == null){
+    /*else if(req.query.fname == null){
         res.send('A first name must be selected');
     }
     else if(req.query.lname == null){
@@ -61,7 +65,7 @@ router.get('/insert', function(req, res){
     }
     else if(req.query.ifambassador == null){
         res.send('You must select whether or not this order_info is an ambassador');
-    }
+    }*/
     else {
         // passing all the query parameters (req.query) to the insert function instead of each individually
         orderinfo_dal.insert(req.query, function(err,result) {
